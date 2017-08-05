@@ -1,0 +1,21 @@
+{
+  "name": "440px",
+  "version": "1.0.0",
+  "description": "Take-home project so patreon gives me a dang job",
+  "main": "index.js",
+  "author": "Ryan Carey <me@ryancarey.ca>",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-preset-stage-3": "^6.24.1",
+    "neutrino": "^6.1.5",
+    "neutrino-preset-airbnb-base": "^6.1.5",
+    "neutrino-preset-jest": "^6.1.5",
+    "neutrino-preset-web": "^6.1.5"
+  },
+  "scripts": {
+    "start": "neutrino start",
+    "build": "neutrino build",
+    "lint": "neutrino lint",
+    "test": "neutrino test"
+  }
+}
