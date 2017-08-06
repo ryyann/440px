@@ -14,10 +14,11 @@
     "neutrino-preset-web": "^6.1.5"
   },
   "scripts": {
+    "neutrino": "neutrino",
     "start": "neutrino start",
     "build": "neutrino build",
     "lint": "neutrino lint",
     "test": "neutrino test",
-    "publish": "rm -rf gh-pages/** && neutrino build && cp -r build/** gh-pages/ && git add . && git commit -m PUBLISH && git push origin master"
+    "publish": "rm -rf docs/** && neutrino build && cp -r build/** docs/ && git add . && git commit -m PUBLISH && git push origin master"
   }
 }
