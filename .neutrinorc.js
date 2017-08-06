@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 module.exports = {
   use: [
     'neutrino-preset-airbnb-base',

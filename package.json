@@ -7,6 +7,7 @@
   "license": "MIT",
   "devDependencies": {
     "babel-preset-stage-3": "^6.24.1",
+    "dotenv": "^4.0.0",
     "neutrino": "^6.1.5",
     "neutrino-preset-airbnb-base": "^6.1.5",
     "neutrino-preset-jest": "^6.1.5",
@@ -16,6 +17,7 @@
     "start": "neutrino start",
     "build": "neutrino build",
     "lint": "neutrino lint",
-    "test": "neutrino test"
+    "test": "neutrino test",
+    "publish": "rm -rf gh-pages/** && neutrino build && cp -r build/** gh-pages/ && git add . && git commit -m PUBLISH && git push origin master"
   }
 }
