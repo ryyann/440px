@@ -1,1 +1,0 @@
-webpackJsonp(["index"],{"./src/index.js":function(){const a=document.createElement("main"),b=document.createTextNode("Hello world?");a.appendChild(b),document.getElementById("root").appendChild(a),!1},"multi /Users/ryancarey/code/patreon/src/index":function(a,b,c){a.exports=c("./src/index.js")}},["multi /Users/ryancarey/code/patreon/src/index"]);

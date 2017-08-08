@@ -1,9 +1,32 @@
-const app = document.createElement('main');
-const text = document.createTextNode('Hello world?');
+/* eslint-disable no-shadow, import/prefer-default-export */
+// index.js
+// App entrypoint
 
-app.appendChild(text);
-document.getElementById('root').appendChild(app);
+import { attachStore } from './lib/store';
+import app from './app';
 
-if (module.hot) {
-  module.hot.accept();
-}
+// babili dead code elimination will remove blocks
+// wrapped with this in production
+const DEV = process.env.NODE_ENV === 'development';
+
+// connect data store and attach app
+// to DOM at node provided in HTML
+const attach = (app) => {
+  const root = document.getElementById('root');
+  if (DEV) {
+    const main = root.children[0];
+    if (main) {
+      main.remove();
+    }
+  }
+  root.appendChild(attachStore(app));
+};
+
+attach(app);
+
+// enable hot module reloading
+// if (DEV && module.hot) {
+//   module.hot.accept('./app', () => import('./app').then((newApp) => {
+//     attach(newApp.default);
+//   }));
+// }

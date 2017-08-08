@@ -2,14 +2,14 @@ require('dotenv').config();
 
 module.exports = {
   use: [
-    'neutrino-preset-airbnb-base',
     'neutrino-preset-jest',
+    'neutrino-preset-airbnb-base',
     ['neutrino-preset-web', {
       babel: {
         presets: ['stage-3']
       },
       html: {
-        title: 'giphstagur',
+        title: '440px',
         links: [
           {
             rel: "apple-touch-icon",

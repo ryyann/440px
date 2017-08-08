@@ -6,8 +6,11 @@
   "author": "Ryan Carey <me@ryancarey.ca>",
   "license": "MIT",
   "devDependencies": {
+    "babel-plugin-module-resolver": "^2.7.1",
     "babel-preset-stage-3": "^6.24.1",
-    "dotenv": "^4.0.0",
+    "dotenv-cli": "^1.4.0",
+    "eslint-import-resolver-babel-module": "^3.0.0",
+    "eslint-plugin-import": "^2.7.0",
     "neutrino": "^6.1.5",
     "neutrino-preset-airbnb-base": "^6.1.5",
     "neutrino-preset-jest": "^6.1.5",
@@ -15,10 +18,10 @@
   },
   "scripts": {
     "neutrino": "neutrino",
-    "start": "neutrino start",
-    "build": "neutrino build",
+    "start": "dotenv neutrino start",
+    "build": "dotenv neutrino build",
     "lint": "neutrino lint",
-    "test": "neutrino test",
-    "publish": "rm -rf docs/** && neutrino build && cp -r build/** docs/ && git add . && git commit -m PUBLISH && git push origin master"
+    "test": "dotenv neutrino test",
+    "deploy": "rm -rf docs/** && neutrino build && cp -r build/** docs/ && git add . && git commit -m PUBLISH && git push origin master"
   }
 }
