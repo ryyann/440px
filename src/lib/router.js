@@ -58,7 +58,7 @@ function routeReducer(state, action) {
 export function routerMiddleware(next, state, action, dispatch) {
   const nextState = routeReducer(state, action);
   if (action.type === MIDDLEWARE_APPLIED) {
-    history.pushState(nextState, '', `${BASE_PATH}${window.location.pathname}`);
+    history.pushState(nextState, '', `${BASE_PATH}${window.location.pathname.replace(BASE_PATH, '')}`);
     window.addEventListener('popstate', (event) => {
       event.preventDefault();
       const originalState = event.state;
