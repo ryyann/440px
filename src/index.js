@@ -2,7 +2,7 @@
 // index.js
 // App entrypoint
 
-import { attachStore } from './lib/store';
+import { attachStore } from './store';
 import app from './app';
 
 // babili dead code elimination will remove blocks
@@ -25,8 +25,8 @@ const attach = (app) => {
 attach(app);
 
 // enable hot module reloading
-// if (DEV && module.hot) {
-//   module.hot.accept('./app', () => import('./app').then((newApp) => {
-//     attach(newApp.default);
-//   }));
-// }
+if (DEV && module.hot) {
+  module.hot.accept('./app', () => import('./app').then((newApp) => {
+    attach(newApp.default);
+  }));
+}

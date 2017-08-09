@@ -1,5 +1,5 @@
 import config from '../config';
-import { MIDDLEWARE_APPLIED } from './store';
+import { MIDDLEWARE_APPLIED } from './getStore';
 
 const { BASE_PATH } = config;
 
@@ -11,23 +11,48 @@ export const go = location => ({
   payload: location,
 });
 
+const routeMatches = {};
+
+export const matchRoutePath = (route, url) => {
+  if (!routeMatches[route.path]) {
+    const parts = route.path.replace(/^\//, '').split('/');
+    const matchString = parts.map((part) => {
+      if (part.indexOf(':') === 0) {
+        return '([\\w\\d]*)';
+      }
+      return part;
+    }).join('/');
+    routeMatches[route.path] = {
+      test: new RegExp(`^${BASE_PATH}/${matchString}$`, 'g'),
+      params: parts.filter(part => part.indexOf(':') === 0)
+                   .map(part => part.replace(/^:/, '')),
+    };
+  }
+  const match = routeMatches[route.path].test.exec(url);
+  if (!match) {
+    return false;
+  }
+  const params = routeMatches[route.path].params.reduce((acc, param, i) => Object.assign(acc, {
+    [param]: match[i + 1],
+  }), {});
+  return { component: route.component, params };
+};
+
 export default function getRouter(routes) {
-  return (state, dispatch) =>
-    routes.reduce((match, route) => {
+  const configuredRoutes = routes.map(route =>
+    Object.assign(route, {
+      path: `${BASE_PATH}${route.path}`,
+    }));
+  return state =>
+    configuredRoutes.reduce((routeComponent, route) => {
+      if (routeComponent) {
+        return routeComponent;
+      }
+      const match = matchRoutePath(route, state.router.path);
       if (match) {
-        return match;
+        return match.component();
       }
-      let path;
-      if (typeof route.path === 'string') {
-        path = new RegExp(`^${BASE_PATH}${route.path}$`);
-      }
-      if (!(path instanceof RegExp)) {
-        throw new Error('Route misconfigured, path must be a string or RegExp');
-      }
-      if (path.test(state.router.path)) {
-        return route.component(state, dispatch);
-      }
-      return match;
+      return null;
     }, null);
 }
 
@@ -57,8 +82,12 @@ function routeReducer(state, action) {
 
 export function routerMiddleware(next, state, action, dispatch) {
   const nextState = routeReducer(state, action);
+
   if (action.type === MIDDLEWARE_APPLIED) {
+    // push initial state on middleware load
     history.pushState(nextState, '', `${BASE_PATH}${window.location.pathname.replace(BASE_PATH, '')}`);
+
+    // listen for forward and back button
     window.addEventListener('popstate', (event) => {
       event.preventDefault();
       const originalState = event.state;
@@ -68,6 +97,7 @@ export function routerMiddleware(next, state, action, dispatch) {
     }, false);
   }
 
+  // update history when route is changed
   if (action.type === UPDATE_LOCATION) {
     history.pushState(nextState, '', `${BASE_PATH}${action.payload}`);
   }

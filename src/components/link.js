@@ -1,7 +1,7 @@
-import { withState } from '../lib/store';
+import { withDispatch } from '../store';
 import { go } from '../lib/router';
 
-const link = (state, dispatch, options) => ({
+const link = (dispatch, options) => ({
   type: 'a',
   attributes: [
     ['href', options.to],
@@ -16,4 +16,4 @@ const link = (state, dispatch, options) => ({
   children: [options.text],
 });
 
-export default withState(link);
+export default withDispatch(link);

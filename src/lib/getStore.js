@@ -4,13 +4,10 @@
 // Data store which will trigger re-render on
 // updates to data.
 
-import { routerMiddleware } from './router';
-import reducer, { initialState } from '../reducer';
-
 export const INITIAL = '__INITIAL__';
 export const MIDDLEWARE_APPLIED = '__MIDDLEWARE_APPLIED__';
 
-function getStore(initialReducer, initialState) {
+export default function getStore(initialReducer, initialState) {
   let reducer = initialReducer;
 
   // Apply initial state
@@ -45,31 +42,20 @@ function getStore(initialReducer, initialState) {
 
   const attachStore = (newApp) => {
     app = newApp;
-    return app(state, dispatch);
+    return app(state);
   };
 
-  function withState(component) {
-    return (...args) => component(state, dispatch, ...args);
-  }
+  const withState = component =>
+    (...args) => component(state, ...args);
+
+  const withDispatch = component =>
+    (...args) => component(dispatch, ...args);
+
+  const connect = component => withDispatch(withState(component));
 
   const replaceReducer = (newReducer) => {
     reducer = newReducer;
   };
 
-  return { attachStore, replaceReducer, dispatch, withState, applyMiddleware };
+  return { attachStore, replaceReducer, withState, withDispatch, connect, applyMiddleware };
 }
-
-const store = getStore(reducer, initialState);
-store.applyMiddleware(routerMiddleware);
-
-export const withState = store.withState;
-export const attachStore = store.attachStore;
-
-export default store;
-
-// if (process.env.NODE_ENV === 'development' && module.hot) {
-//   module.hot.accept('../reducer', () => import('../reducer').then(newReducer =>
-//     store.replaceReducer(newReducer.default),
-//   ));
-// }
-

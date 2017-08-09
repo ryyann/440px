@@ -1,3 +1,4 @@
+/* eslint-disable import/no-named-as-default */
 import home from './pages/home';
 import image from './pages/image';
 
@@ -7,7 +8,7 @@ export default [
     component: home,
   },
   {
-    path: '/image',
+    path: '/image/:id',
     component: image,
   },
 ];

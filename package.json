@@ -6,6 +6,7 @@
   "author": "Ryan Carey <me@ryancarey.ca>",
   "license": "MIT",
   "devDependencies": {
+    "babel-plugin-dynamic-import-webpack": "^1.0.1",
     "babel-plugin-module-resolver": "^2.7.1",
     "babel-preset-stage-3": "^6.24.1",
     "dotenv-cli": "^1.4.0",

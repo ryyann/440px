@@ -6,7 +6,8 @@ module.exports = {
     'neutrino-preset-airbnb-base',
     ['neutrino-preset-web', {
       babel: {
-        presets: ['stage-3']
+        presets: ['stage-3'],
+        plugins: ['dynamic-import-webpack']
       },
       html: {
         title: '440px',
