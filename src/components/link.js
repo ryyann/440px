@@ -1,3 +1,6 @@
+// link.js
+// router connected link
+
 import { withDispatch } from '../store';
 import { go } from '../lib/router';
 import classNames from '../utils/classNames';
@@ -10,8 +13,11 @@ const link = (dispatch, options) => ({
   ],
   listeners: [
     ['click', (e) => {
+      // prevent browser navigation
       e.preventDefault();
       e.stopPropagation();
+
+      // dispatch UPDATE_LOCATION event
       dispatch(go(options.to));
     }],
   ],

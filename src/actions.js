@@ -1,3 +1,6 @@
+// actions.js
+// redux-style action creators and constants
+
 import * as api from './api';
 
 export const GET_IMAGE_PENDING = 'GET_IMAGE_PENDING';
@@ -15,6 +18,7 @@ const getFeaturedImagesPending = () => ({ type: GET_FEATURED_IMAGES_PENDING });
 const getFeaturedImagesFulfilled = payload => ({ type: GET_FEATURED_IMAGES_FULFILLED, payload });
 const getFeaturedImagesRejected = error => ({ type: GET_FEATURED_IMAGES_REJECTED, error });
 
+// get an image by id
 export const getImage = async (dispatch, id) => {
   let image;
   dispatch(getImagePending(id));
@@ -28,6 +32,7 @@ export const getImage = async (dispatch, id) => {
   dispatch(getImageFulfilled(image));
 };
 
+// get featured images todo: add pagination
 export const getFeaturedImages = async (dispatch) => {
   let images;
   dispatch(getFeaturedImagesPending());

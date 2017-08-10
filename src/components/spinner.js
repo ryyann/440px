@@ -1,3 +1,6 @@
+// spinner.js
+// loading spinner
+
 import classNames from '../utils/classNames';
 import './spinner.css';
 

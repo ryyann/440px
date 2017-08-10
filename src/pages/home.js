@@ -1,3 +1,6 @@
+// home.js
+// template for home page
+
 /* eslint-disable no-param-reassign */
 import { connect } from '../store';
 import nav from '../components/nav';
@@ -13,9 +16,12 @@ export function home(state, dispatch) {
   } = state;
   let images = [];
 
+  // if there is no image metadata stored, fetch
+  // it from 500px
   if (items.length === 0 && !isLoading) {
     getFeaturedImages(dispatch);
   } else {
+    // render a list of image links
     images = items.map(id =>
       imageLink({
         id,
@@ -23,27 +29,16 @@ export function home(state, dispatch) {
       }));
   }
 
-  if (isLoading) {
-    return {
-      type: 'div',
-      className: 'home',
-      children: [
-        nav(),
-        spinner(),
-      ],
-    };
-  }
-
   return {
     type: 'div',
     className: 'home',
     children: [
       nav(),
-      {
+      !isLoading ? {
         type: 'div',
         className: 'home-images',
         children: [...images],
-      },
+      } : spinner(), // if no images are yet loaded, display a spinner
     ],
   };
 }

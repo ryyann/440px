@@ -1,3 +1,6 @@
+// logo.js
+// the logo!
+
 import link from './link';
 import classNames from '../utils/classNames';
 import './logo.css';

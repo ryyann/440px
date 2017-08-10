@@ -1,4 +1,5 @@
 /* eslint-disable no-shadow, import/prefer-default-export */
+
 // index.js
 // App entrypoint
 
@@ -19,7 +20,7 @@ const attach = (app) => {
       main.remove();
     }
   }
-  root.appendChild(attachStore(app));
+  attachStore(app(root));
 };
 
 attach(app);

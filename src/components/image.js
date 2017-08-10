@@ -1,3 +1,7 @@
+// components/image.js
+// Image component, takes an iamge id and renders
+// the corresponding image
+
 import { connect } from '../store';
 import { getImage } from '../actions';
 import spinner from './spinner';
@@ -23,7 +27,9 @@ const sizes = {
   },
 };
 
-const getSize = (imgSize, imgObj) => imgObj.images.filter(({ size }) => imgSize === size)[0].url;
+// get image url for requested size
+const getSize = (imgSize, imgObj) =>
+  imgObj.images.filter(({ size }) => imgSize === size)[0].url;
 
 function image(state, dispatch, {
   id,
@@ -31,7 +37,10 @@ function image(state, dispatch, {
   className,
   size = 2,
 }) {
+  // read image metadata from store
   const imgObject = state.images.byId[id];
+
+  // if image is not stored, fetch metadata
   if (!imgObject) {
     getImage(dispatch, id);
   }

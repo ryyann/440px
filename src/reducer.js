@@ -1,3 +1,6 @@
+// reducer.js
+// transform app state in response to actions
+
 import {
   GET_FEATURED_IMAGES_PENDING,
   GET_FEATURED_IMAGES_FULFILLED,
@@ -17,8 +20,15 @@ export const initialState = {
   },
 };
 
+// map items to their ID
 const toIds = imageItems => imageItems.reduce((ids, item) =>
   Object.assign(ids, { [item.id]: item }), {});
+
+// normalize image response
+const normalize = imageItems => ({
+  byId: toIds(imageItems),
+  items: imageItems.map(item => item.id.toString()),
+});
 
 export default function reducer(state, action) {
   switch (action.type) {
@@ -33,10 +43,7 @@ export default function reducer(state, action) {
       });
     case GET_FEATURED_IMAGES_FULFILLED:
       return Object.assign({}, state, {
-        images: {
-          byId: toIds(action.payload),
-          items: action.payload.map(item => item.id.toString()),
-        },
+        images: normalize(action.payload),
         home: {
           isLoading: false,
         },

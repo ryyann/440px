@@ -1,9 +1,15 @@
+// imageDescription.js
+// renders an image description from stored metadata.
+// returns null when an image is not found.
+
 import { withState } from '../store';
 import './imageDescription.css';
 
 function imageDescription(state, id) {
+  // read metadata from store
   const image = state.images.byId[id];
-  return {
+
+  return image ? {
     type: 'div',
     className: 'image-description',
     children: [
@@ -28,7 +34,7 @@ function imageDescription(state, id) {
         children: [image.description],
       } : null,
     ],
-  };
+  } : null;
 }
 
 export default withState(imageDescription);

@@ -1,3 +1,6 @@
+// image.js
+// template for image page
+
 import { withState } from '../store';
 import nav from '../components/nav';
 import image from '../components/image';
@@ -6,6 +9,7 @@ import nextImages from '../components/nextImages';
 import './image.css';
 
 function imagePage(state) {
+  // get the image to be rendered from router
   const { id } = state.router.params;
   return {
     type: 'div',

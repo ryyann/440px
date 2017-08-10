@@ -1,11 +1,13 @@
 /* eslint-disable no-shadow, no-console */
 
 // store.js
-// Data store which will trigger re-render on
+// Redux/Flux style data store which will trigger re-render on
 // updates to data.
 
 export const INITIAL = '__INITIAL__';
 export const MIDDLEWARE_APPLIED = '__MIDDLEWARE_APPLIED__';
+
+const DEV = process.env.NODE_ENV === 'development';
 
 export default function getStore(initialReducer, initialState) {
   let reducer = initialReducer;
@@ -22,13 +24,21 @@ export default function getStore(initialReducer, initialState) {
     if (!app) {
       throw new Error('Store is not fully configured, please call method addState');
     }
-    if (process.env.NODE_ENV === 'development') {
+    if (DEV) {
       console.log('Dispatching...', action);
     }
+
+    // apply reducers to state
     const newState = reducer(state, action);
+
+    // reducers must provide a new object to trigger a re-render
     if (newState !== state) {
+      // store reduced state
       state = newState;
-      console.log('Next state', state);
+      if (DEV) {
+        console.log('Next state', state);
+      }
+      // trigger app render
       app(state, dispatch);
     }
   };
@@ -42,15 +52,19 @@ export default function getStore(initialReducer, initialState) {
 
   const attachStore = (newApp) => {
     app = newApp;
+    // initial app render
     return app(state, dispatch);
   };
 
+  // connect a component to state
   const withState = component =>
     (...args) => component(state, ...args);
 
+  // connect a component to dispatch
   const withDispatch = component =>
     (...args) => component(dispatch, ...args);
 
+  // connect a component to state and dispatch
   const connect = component => withDispatch(withState(component));
 
   const replaceReducer = (newReducer) => {

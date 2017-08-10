@@ -1,3 +1,7 @@
+// nav.js
+// site-wide top navbar. when not on
+// home page, provides a link to go home
+
 import { withState } from '../store';
 import logo from './logo';
 import link from './link';
