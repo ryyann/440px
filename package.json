@@ -2,14 +2,13 @@
   "name": "440px",
   "version": "1.0.0",
   "description": "Take-home project so patreon gives me a dang job",
-  "main": "index.js",
+  "main": "src/index.js",
   "author": "Ryan Carey <me@ryancarey.ca>",
   "license": "MIT",
   "devDependencies": {
     "babel-plugin-dynamic-import-webpack": "^1.0.1",
     "babel-plugin-module-resolver": "^2.7.1",
     "babel-preset-stage-3": "^6.24.1",
-    "dotenv-cli": "^1.4.0",
     "eslint-import-resolver-babel-module": "^3.0.0",
     "eslint-plugin-import": "^2.7.0",
     "neutrino": "^6.1.5",
@@ -19,8 +18,8 @@
   },
   "scripts": {
     "neutrino": "neutrino",
-    "start": "dotenv neutrino start",
-    "build": "dotenv neutrino build",
+    "start": "neutrino start",
+    "build": "neutrino build",
     "lint": "neutrino lint",
     "deploy": "neutrino build && now --static ./build"
   }
