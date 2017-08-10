@@ -2,7 +2,6 @@ require('dotenv').config();
 
 module.exports = {
   use: [
-    'neutrino-preset-jest',
     'neutrino-preset-airbnb-base',
     ['neutrino-preset-web', {
       babel: {

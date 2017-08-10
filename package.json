@@ -14,15 +14,14 @@
     "eslint-plugin-import": "^2.7.0",
     "neutrino": "^6.1.5",
     "neutrino-preset-airbnb-base": "^6.1.5",
-    "neutrino-preset-jest": "^6.1.5",
-    "neutrino-preset-web": "^6.1.5"
+    "neutrino-preset-web": "^6.1.5",
+    "now": "^7.3.0"
   },
   "scripts": {
     "neutrino": "neutrino",
     "start": "dotenv neutrino start",
     "build": "dotenv neutrino build",
     "lint": "neutrino lint",
-    "test": "dotenv neutrino test",
-    "deploy": "rm -rf docs/** && neutrino build && cp -r build/** docs/ && git add . && git commit -m PUBLISH && git push origin master"
+    "deploy": "neutrino build && now --static ./build"
   }
 }

@@ -5,7 +5,7 @@ const config = {
     API_CONSUMER_KEY: 'YajGY9WC3z6ANzPiycFCdxDsM38sGJJiBYsFfx6S',
   },
   production: {
-    BASE_PATH: '/440px',
+    BASE_PATH: '',
     API_HOST: 'https://api.500px.com/v1',
     API_CONSUMER_KEY: 'YajGY9WC3z6ANzPiycFCdxDsM38sGJJiBYsFfx6S',
   },

@@ -13,15 +13,14 @@ function nextImages(state, id) {
   } else {
     nextItems = items.slice(index - 1, index + 4);
   }
-  const images = nextItems.map(imageId => imageLink({
-    id: imageId,
-    className: imageId === id ? 'current' : '',
-    size: 2,
-  }));
   return {
     type: 'div',
     className: 'next-images',
-    children: images,
+    children: nextItems.map(imageId => imageLink({
+      id: imageId,
+      className: imageId === id ? 'current' : '',
+      size: 2,
+    })),
   };
 }
 
