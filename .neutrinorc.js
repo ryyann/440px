@@ -30,6 +30,11 @@ module.exports = {
             href: "http://localhost:5000/static/favicon-16x16.png"
           }
         ]
+      },
+      minify: {
+        overrides: {
+          sourceMap: 'source-map'
+        }
       }
     }]
   ]
