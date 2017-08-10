@@ -1,3 +1,3 @@
 export default function classNames(...names) {
-  return names.join(' ');
+  return names.filter(name => name && name.length).join(' ');
 }

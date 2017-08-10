@@ -1,0 +1,30 @@
+.image-link {
+  position:  relative;
+  transition: 0.2s;
+  margin: 1.5em;
+}
+
+.image-link .hover-text {
+  display: block;
+  position: absolute;
+  height: 1em;
+  line-height: 1em;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  text-align: center;
+  opacity: 0;
+  z-index: 10;
+  transition: 0.2s;
+  color: white;
+}
+
+.image-link:hover .image {
+  filter: brightness(0.8);
+}
+
+.image-link:hover .hover-text {
+  opacity: 1;
+}

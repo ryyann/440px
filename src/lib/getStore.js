@@ -42,7 +42,7 @@ export default function getStore(initialReducer, initialState) {
 
   const attachStore = (newApp) => {
     app = newApp;
-    return app(state);
+    return app(state, dispatch);
   };
 
   const withState = component =>

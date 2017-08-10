@@ -1,0 +1,12 @@
+.next-images {
+  margin: 2em auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+@media (max-width: 989px) {
+  .next-images {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}

@@ -1,0 +1,25 @@
+.image-description {
+  padding-left: 2em;
+  max-width: 50%;
+}
+
+.image-description h2 {
+  font-weight: lighter;
+}
+
+.image-description .author span {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+}
+
+@media (min-width: 990px) {
+  .image-description {
+    min-width: 500px;
+  }
+}
+
+@media (max-width: 989px) {
+  .image-description {
+    padding-left: 0;
+  }
+}

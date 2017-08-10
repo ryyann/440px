@@ -1,0 +1,18 @@
+.image-details {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 2em;
+  max-width: 1050px;
+}
+
+.image-details .main-image {
+  width: 440px;
+  height: 440px;
+}
+
+@media (max-width: 989px) {
+  .image-details {
+    flex-direction: column;
+    align-items: center;
+  }
+}

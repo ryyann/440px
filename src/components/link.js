@@ -1,8 +1,10 @@
 import { withDispatch } from '../store';
 import { go } from '../lib/router';
+import classNames from '../utils/classNames';
 
 const link = (dispatch, options) => ({
   type: 'a',
+  className: classNames('link', options.className),
   attributes: [
     ['href', options.to],
   ],
@@ -13,7 +15,7 @@ const link = (dispatch, options) => ({
       dispatch(go(options.to));
     }],
   ],
-  children: [options.text],
+  children: options.children || [options.text],
 });
 
 export default withDispatch(link);

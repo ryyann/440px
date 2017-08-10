@@ -1,0 +1,39 @@
+.top-nav {
+  position: relative;
+  text-align: center;
+  padding:  3em;
+  margin: 0 auto;
+}
+
+.top-nav .tagline {
+  font-family:  Open Sans;
+  font-size: 1em;
+}
+
+.top-nav .link.back {
+  position: absolute;
+  left: 0.5em;
+  text-decoration: none;
+}
+
+.top-nav .link.back span {
+  display: inline-block;
+  font-size: 1.2em;
+  letter-spacing: 0.5em;
+}
+
+.top-nav .link.back:hover {
+  text-decoration:  underline;
+}
+
+.top-nav a {
+  color: black;
+}
+
+.nav-logo {
+  font-size: 3em;
+  line-height: 1em;
+  margin: 0 auto 0.25em auto;
+  text-align: center;
+  display: inline-block;
+}

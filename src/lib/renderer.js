@@ -1,3 +1,5 @@
+const noNull = arr => arr.filter(a => a !== null);
+
 export default function render(element, cb) {
   if (element === null) {
     return null;
@@ -36,13 +38,13 @@ export default function render(element, cb) {
   }
 
   if (attributes && attributes.length) {
-    attributes.forEach(([attribute, value]) => {
+    noNull(attributes).forEach(([attribute, value]) => {
       el.setAttribute(attribute, value);
     });
   }
 
   if (listeners && listeners.length) {
-    listeners.forEach(([event, callback]) => {
+    noNull(listeners).forEach(([event, callback]) => {
       el.addEventListener(event, callback);
     });
   }

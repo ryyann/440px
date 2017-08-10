@@ -1,3 +1,25 @@
-main {
-  background: black;
+@import url('https://fonts.googleapis.com/css?family=Cormorant+Garamond|Open+Sans:300');
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
+  display: flex;
+  justify-content: center;
+}
+
+@media (min-width: 990px) {
+  #app {
+    max-width: 990px;
+  }
+}
+
+@media (max-width: 989px) {
+  #app {
+    max-width: 95%;
+    margin: auto;
+  }
 }

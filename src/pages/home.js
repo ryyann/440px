@@ -1,36 +1,49 @@
 /* eslint-disable no-param-reassign */
 import { connect } from '../store';
-import image from '../components/image';
-import link from '../components/link';
-import { getFeaturedImages } from '../api';
+import nav from '../components/nav';
+import imageLink from '../components/imageLink';
+import spinner from '../components/spinner';
+import { getFeaturedImages } from '../actions';
+import './home.css';
 
 export function home(state, dispatch) {
-  async function load() {
-    const res = await getFeaturedImages();
-    const json = await res.json();
-    dispatch({ type: 'LOAD', payload: json.photo.image_url });
+  const {
+    home: { isLoading },
+    images: { items },
+  } = state;
+  let images = [];
+
+  if (items.length === 0 && !isLoading) {
+    getFeaturedImages(dispatch);
+  } else {
+    images = items.map(id =>
+      imageLink({
+        id,
+        size: 2,
+      }));
+  }
+
+  if (isLoading) {
+    return {
+      type: 'div',
+      className: 'home',
+      children: [
+        nav(),
+        spinner(),
+      ],
+    };
   }
 
   return {
     type: 'div',
+    className: 'home',
     children: [
-      state.greeting === 'hello world' ? 'wow' : null,
-      {
-        type: 'button',
-        listeners: [
-          ['click', load],
-        ],
-        children: [
-          `${state.greeting}`,
-        ],
-      },
+      nav(),
       {
         type: 'div',
-        children: [
-          link({ to: '/image/400', text: 'photo' }),
-        ],
+        className: 'home-images',
+        children: [...images],
       },
-      state.image ? image({ src: state.image, className: 'wow' }) : null,
     ],
   };
 }
