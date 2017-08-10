@@ -56,7 +56,7 @@ export default function getRouter(routes) {
     }));
   return (state, dispatch) => {
     if (!state.router || !state.router.path) {
-      dispatch(go(window.location.pathname));
+      dispatch(go(window.location.pathname.replace(BASE_PATH, '')));
       return null;
     }
     const matched = matchRoute(state.router.path);
